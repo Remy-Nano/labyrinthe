@@ -1,0 +1,75 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #3d0101;
+    background-image: url(carte.webp);
+    background-size: cover;
+}
+
+h1 {
+    color: #333;
+}
+
+#maze {
+    width: 800px; /* Correspond à 20 colonnes de 20px */
+    height: 800px; /* Correspond à 20 lignes de 20px */
+    margin: 20px auto;
+    position: relative;
+    background-color: rgb(124, 89, 55);
+    border: 2px solid black;
+}
+
+.cell {
+    width: 20px;
+    height: 20px;
+    box-sizing: border-box;
+    position: absolute;
+}
+
+.cell.visited {
+    background-color: #e0a558;
+}
+
+.cell.path {
+    background-color: #ebf376; /* Pour visualiser les cellules que Zelda explore */
+}
+
+.wall {
+    border: 1px solid black;
+}
+
+/* Style pour l'entrée et la sortie */
+.cell.entrance {
+    background-image: url('porte.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.cell.exit {
+    background-image: url('porte.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Style pour la salle au trésor */
+.cell.treasure {
+    background-image: url('tresor.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Style pour Zelda */
+#zelda {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-image: url('zelda.png');
+    background-size: cover;
+    z-index: 10;
+}
+.trail {
+    background-color: #a9a9a9; /* Couleur pour indiquer la trace de Zelda */
+}
