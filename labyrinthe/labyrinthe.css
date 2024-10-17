@@ -32,7 +32,7 @@ h1 {
 }
 
 .cell.path {
-    background-color: #ebf376; /* Pour visualiser les cellules que Zelda explore */
+    background-color: #e0a558; /* Pour visualiser les cellules que Zelda explore */
 }
 
 .wall {
@@ -72,5 +72,9 @@ h1 {
     z-index: 10;
 }
 .trail {
-    background-color: #a9a9a9; /* Couleur pour indiquer la trace de Zelda */
+    background-image: url('images.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
+

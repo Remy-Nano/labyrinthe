@@ -6,6 +6,7 @@ let grid = [];
 let stack = [];
 let zelda;  // Référence à Zelda
 
+// Fonction pour initialiser le labyrinthe
 function setup() {
     mazeContainer.style.width = `${cols * 20}px`;
     mazeContainer.style.height = `${rows * 20}px`;
@@ -20,19 +21,20 @@ function setup() {
         grid.push(row);
     }
 
-    // Set the entrance
+    // Définir l'entrée
     let entrance = grid[0][0];
     entrance.visited = true;
     entrance.div.classList.add('entrance');
     stack.push(entrance);
 
-    // Set the exit
+    // Définir la sortie
     let exit = grid[rows - 1][cols - 1];
     exit.div.classList.add('exit');
 
     draw();
 }
 
+// Fonction pour dessiner le labyrinthe
 function draw() {
     let interval = setInterval(() => {
         if (stack.length > 0) {
@@ -48,14 +50,14 @@ function draw() {
             }
         } else {
             clearInterval(interval);
-            // Maze generation is complete, now show the treasure and place Zelda
+            // La génération du labyrinthe est terminée, maintenant afficher le trésor et placer Zelda
             showTreasure();
-            placeZelda();  // Place Zelda at the entrance
+            placeZelda();  // Placer Zelda à l'entrée
         }
     }, 5);
 }
 
-// Function to show the treasure in the center of the maze
+// Fonction pour afficher le trésor au centre du labyrinthe
 function showTreasure() {
     let centerRow = Math.floor(rows / 2);
     let centerCol = Math.floor(cols / 2);
@@ -63,10 +65,10 @@ function showTreasure() {
     treasureRoom.div.classList.add('treasure');
 }
 
-// Function to place Zelda at the entrance
+// Fonction pour placer Zelda à l'entrée
 function placeZelda() {
     if (zelda) {
-        zelda.remove(); // Remove any existing Zelda to avoid duplicates
+        zelda.remove(); // Supprimer toute instance existante de Zelda pour éviter les doublons
     }
 
     zelda = document.createElement('div');
@@ -86,6 +88,7 @@ function placeZelda() {
     moveZeldaToTreasure();
 }
 
+// Fonction pour déplacer Zelda vers le trésor
 function moveZeldaToTreasure() {
     let centerRow = Math.floor(rows / 2);
     let centerCol = Math.floor(cols / 2);
@@ -96,18 +99,19 @@ function moveZeldaToTreasure() {
     });
 }
 
+// Fonction pour déplacer Zelda vers la sortie
 function moveZeldaToExit() {
     let exitRow = rows - 1;
     let exitCol = cols - 1;
 
     findPathAndMove(Math.floor(rows / 2), Math.floor(cols / 2), exitRow, exitCol, () => {
         alert("Zelda a quitté le labyrinthe !");
-        // Redirige vers la carte principale avec un paramètre pour indiquer que Zelda doit continuer vers le point 3
-        window.location.href = '../laRoute/carte.html?fromLabyrinth=true&continueToPoint3=true';
+        // Rediriger vers la carte principale avec un paramètre pour indiquer que Zelda doit continuer vers le point 3
+        window.location.href = '../laRoute/carte.html?fromLabyrinth=true&startFromPoint2=true';
     });
 }
 
-// Function to find the path using Depth First Search and move Zelda step by step
+// Fonction pour trouver le chemin à l'aide de la recherche en profondeur (DFS) et déplacer Zelda étape par étape
 function findPathAndMove(startRow, startCol, targetRow, targetCol, callback) {
     let path = [];
     let visited = Array.from(Array(rows), () => Array(cols).fill(false));
@@ -128,7 +132,7 @@ function findPathAndMove(startRow, startCol, targetRow, targetCol, callback) {
             grid[row][col].div.classList.add('path');
         }
 
-        // Explore les voisins (haut, droite, bas, gauche)
+        // Explorer les voisins (haut, droite, bas, gauche)
         if (row > 0 && !grid[row][col].walls[0] && dfs(row - 1, col)) return true; // Haut
         if (col < cols - 1 && !grid[row][col].walls[1] && dfs(row, col + 1)) return true; // Droite
         if (row < rows - 1 && !grid[row][col].walls[2] && dfs(row + 1, col)) return true; // Bas
@@ -143,7 +147,7 @@ function findPathAndMove(startRow, startCol, targetRow, targetCol, callback) {
     }
 }
 
-// Function to move Zelda along the calculated path
+// Fonction pour déplacer Zelda le long du chemin calculé
 function moveZeldaAlongPath(path, callback) {
     let index = 0;
 
@@ -155,6 +159,11 @@ function moveZeldaAlongPath(path, callback) {
             if (index > 0) {
                 let previous = path[index - 1];
                 grid[previous.row][previous.col].div.classList.add('trail');
+
+                // Faire disparaître la trace après 1 seconde
+                setTimeout(() => {
+                    grid[previous.row][previous.col].div.classList.remove('trail');
+                }, 1000);
             }
 
             // Déplacer Zelda à la cellule suivante
@@ -167,13 +176,19 @@ function moveZeldaAlongPath(path, callback) {
             if (index > 0) {
                 let previous = path[index - 1];
                 grid[previous.row][previous.col].div.classList.add('trail');
+
+                // Faire disparaître la trace après 1 seconde
+                setTimeout(() => {
+                    grid[previous.row][previous.col].div.classList.remove('trail');
+                }, 1000);
             }
             clearInterval(interval);
             if (callback) callback();
         }
-    }, 200);
+    }, 150);
 }
 
+// Classe pour représenter chaque cellule du labyrinthe
 class Cell {
     constructor(row, col) {
         this.row = row;
@@ -188,6 +203,7 @@ class Cell {
         mazeContainer.appendChild(this.div);
     }
 
+    // Vérifier les voisins non visités
     checkNeighbors() {
         let neighbors = [];
 
@@ -209,6 +225,7 @@ class Cell {
         }
     }
 
+    // Rendre la cellule visible dans le DOM
     render() {
         if (this.visited) {
             this.div.classList.add('visited');
@@ -223,6 +240,7 @@ class Cell {
     }
 }
 
+// Fonction pour supprimer les murs entre deux cellules adjacentes
 function removeWalls(a, b) {
     let x = a.col - b.col;
     if (x === 1) {
@@ -246,4 +264,5 @@ function removeWalls(a, b) {
     b.render();
 }
 
+// Appeler la fonction de configuration pour initialiser le labyrinthe
 setup();
