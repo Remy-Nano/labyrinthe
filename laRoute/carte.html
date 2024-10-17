@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte avec Zelda en mouvement</title>
+    <link rel="stylesheet" href="carte.css">
+</head>
+<body>
+    <div class="map-container">
+        <img src="carte.webp" alt="Carte d'Hyrule" id="map">
+
+        <!-- Points d'intérêt -->
+        <div class="poi1" id="poi-hebra" style="top: 10%; left: 10%;">Hebra</div>
+        <div class="poi2" id="poi-eldin" style="top: 20%; left: 45%;">Eldin Labyrinthe</div>
+        <div class="poi3" id="poi-faron" style="top: 80%; left: 50%;">Faron</div>
+
+        <!-- Image de Zelda qui se déplace -->
+        <img id="zelda" src="zelda.png" alt="Zelda" style="position: absolute; top: 10%; left: 10%; width: 50px; height: 50px;">
+    </div>
+
+    <script src="carte.js"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Empêche le défilement */
+}
+
+.map-container {
+    position: relative;
+    width: 100vw; /* Ajuste la largeur à la taille de la fenêtre */
+    height: 100vh; /* Ajuste la hauteur à la taille de la fenêtre */
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Assure que la carte couvre tout l'espace sans distorsion */
+}
+
+
+.poi1 {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: red;
+    background-image: url(montagne.jfif); 
+    background-size: cover;
+    color: rgb(9, 9, 9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    cursor: pointer;
+}
+.poi2 {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: red;
+    background-image: url(lab.jfif);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    cursor: pointer;
+}.poi3 {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-image: url(chateau.png);
+    background-size: cover;
+    border-radius: 50%;
+    color: rgb(4, 4, 4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    cursor: pointer;
+}
+#zelda {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    transition: all 3s ease;
+}

@@ -17,6 +17,7 @@ h1 {
     position: relative;
     background-color: rgb(124, 89, 55);
     border: 2px solid black;
+    background-image: url(images.jfif);
 }
 
 .cell {

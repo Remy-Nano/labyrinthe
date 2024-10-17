@@ -52,7 +52,7 @@ function draw() {
             showTreasure();
             placeZelda();  // Place Zelda at the entrance
         }
-    }, 50);
+    }, 5);
 }
 
 // Function to show the treasure in the center of the maze
@@ -71,8 +71,15 @@ function placeZelda() {
 
     zelda = document.createElement('div');
     zelda.id = 'zelda';  // On utilise le style défini dans le CSS
-    zelda.style.top = '0px';  // Position initiale à l'entrée
-    zelda.style.left = '0px';
+    if (window.location.search.includes('fromLabyrinth=true')) {
+        // Position initiale à Eldin après avoir quitté le labyrinthe
+        zelda.style.top = '200px'; // Position correspondant à Eldin
+        zelda.style.left = '450px';
+    } else {
+        // Position initiale à l'entrée
+        zelda.style.top = '0px';
+        zelda.style.left = '0px';
+    }
     mazeContainer.appendChild(zelda);
 
     // Déplacer Zelda vers le trésor puis la sortie
@@ -95,6 +102,8 @@ function moveZeldaToExit() {
 
     findPathAndMove(Math.floor(rows / 2), Math.floor(cols / 2), exitRow, exitCol, () => {
         alert("Zelda a quitté le labyrinthe !");
+        // Redirige vers la carte principale avec un paramètre pour indiquer que Zelda doit continuer vers le point 3
+        window.location.href = '../laRoute/carte.html?fromLabyrinth=true&continueToPoint3=true';
     });
 }
 
@@ -120,10 +129,10 @@ function findPathAndMove(startRow, startCol, targetRow, targetCol, callback) {
         }
 
         // Explore les voisins (haut, droite, bas, gauche)
-        if (row > 0 && !grid[row][col].walls[0] && dfs(row - 1, col)) return true;
-        if (col < cols - 1 && !grid[row][col].walls[1] && dfs(row, col + 1)) return true;
-        if (row < rows - 1 && !grid[row][col].walls[2] && dfs(row + 1, col)) return true;
-        if (col > 0 && !grid[row][col].walls[3] && dfs(row, col - 1)) return true;
+        if (row > 0 && !grid[row][col].walls[0] && dfs(row - 1, col)) return true; // Haut
+        if (col < cols - 1 && !grid[row][col].walls[1] && dfs(row, col + 1)) return true; // Droite
+        if (row < rows - 1 && !grid[row][col].walls[2] && dfs(row + 1, col)) return true; // Bas
+        if (col > 0 && !grid[row][col].walls[3] && dfs(row, col - 1)) return true; // Gauche
 
         path.pop();
         return false;
