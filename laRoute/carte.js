@@ -6,7 +6,7 @@ function moveZeldaToExit() {
     findPathAndMove(Math.floor(rows / 2), Math.floor(cols / 2), exitRow, exitCol, () => {
         alert("Zelda a quitté le labyrinthe !");
         // Redirige vers la carte principale avec un paramètre pour indiquer que Zelda doit continuer du point 2 au point 3
-        window.location.href = '../laRoute/carteSortie.html';
+        window.location.href = '../carteSortie.html';
     });
 }
 
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(function() {
             moveZelda('45%', '20%', 3, function() {
                 // Lorsque Zelda arrive à Eldin, redirigez vers le labyrinthe
-                window.location.href = '../laRoute/labyrinthe/labyrinthe.html';
+                window.location.href = '../laRoute/labyrinthe.html';
             });
         }, 0);
     }
