@@ -6,7 +6,7 @@ function moveZeldaToExit() {
     findPathAndMove(Math.floor(rows / 2), Math.floor(cols / 2), exitRow, exitCol, () => {
         alert("Zelda a quitté le labyrinthe !");
         // Redirige vers la carte principale avec un paramètre pour indiquer que Zelda doit continuer du point 2 au point 3
-        window.location.href = '../laRoute/carte.html?fromLabyrinth=true&continueToPoint3=true';
+        window.location.href = '../laRoute/carteSortie.html';
     });
 }
 
@@ -55,7 +55,7 @@ function moveZeldaToExit() {
     findPathAndMove(Math.floor(rows / 2), Math.floor(cols / 2), exitRow, exitCol, () => {
         alert("Zelda a quitté le labyrinthe !");
         // Redirige vers la carte principale avec un paramètre pour indiquer que Zelda doit continuer vers le point 3
-        window.location.href = '../laRoute/carte.html?fromLabyrinth=true&continueToPoint3=true';
+        window.location.href = '../laRoute/index.html?fromLabyrinth=true&continueToPoint3=true';
     });
 }
 
