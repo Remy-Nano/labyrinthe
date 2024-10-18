@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(function() {
             moveZelda('45%', '20%', 3, function() {
                 // Lorsque Zelda arrive à Eldin, redirigez vers le labyrinthe
-                window.location.href = '../labyrinthe/labyrinthe.html';
+                window.location.href = '../laRoute/labyrinthe/labyrinthe.html';
             });
         }, 0);
     }
